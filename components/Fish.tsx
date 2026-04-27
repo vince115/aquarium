@@ -9,16 +9,18 @@ type FishProps = {
   type?: "goldfish" | "zebrafish" | "balloon";
 };
 
-useGLTF.preload("/models/Goldfish.glb");
-useGLTF.preload("/models/Fish.glb");
-useGLTF.preload("/models/Blowfish.glb");
+const BASE_PATH = "/aquarium";
+
+useGLTF.preload(`${BASE_PATH}/models/Goldfish.glb`);
+useGLTF.preload(`${BASE_PATH}/models/Fish.glb`);
+useGLTF.preload(`${BASE_PATH}/models/Blowfish.glb`);
 
 export default function Fish({ type = "goldfish" }: FishProps) {
   const ref = useRef<THREE.Group>(null);
   
-  const { scene: goldfishScene } = useGLTF("/models/Goldfish.glb");
-  const { scene: zebrafishScene } = useGLTF("/models/Fish.glb");
-  const { scene: balloonScene } = useGLTF("/models/Blowfish.glb");
+  const { scene: goldfishScene } = useGLTF(`${BASE_PATH}/models/Goldfish.glb`);
+  const { scene: zebrafishScene } = useGLTF(`${BASE_PATH}/models/Fish.glb`);
+  const { scene: balloonScene } = useGLTF(`${BASE_PATH}/models/Blowfish.glb`);
 
   const modelScene = useMemo(() => {
     if (type === "goldfish") return goldfishScene;
